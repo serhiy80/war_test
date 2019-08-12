@@ -18,12 +18,3 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths: build/*
-
-workflows:
-  version: 2
-  test-deploy:
-    jobs:
-      - test:
-          filters:
-            tags:
-              only: /master/
