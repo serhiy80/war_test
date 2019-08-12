@@ -21,7 +21,8 @@ jobs:
 
 workflows:
   version: 2
-    - test:
-       filters:
-         tags:
-         only: /master/          
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /master/     
