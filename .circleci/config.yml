@@ -3,18 +3,25 @@ jobs:
   build: 
     working_directory: ~/warn_test # directory where steps will run
     docker:
-      - image: circleci/node:9.9.0
+      - image: circleci/node:12.8.0
     steps:
       - checkout # step to check out source code to working directory
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
-      - run: npm install
-      - run: npm run build
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run:
+          name: Install depedendencies
+          command: npm install
+      - run:
+           name: Create a script which runs your application
+           command: npm run build
       - save_cache:
+          name: Save node modules
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - persist_to_workspace:
-          root: ~/repo
+          root: ~/warn_test
           paths: build/*
