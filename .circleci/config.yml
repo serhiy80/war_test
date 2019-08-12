@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Install depedendencies
           command: npm install
-          command: npm install -D lint
+      - run: npm install -D lint
       - run:
           # Lint the source code
           name: Linting
